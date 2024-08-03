@@ -4,6 +4,7 @@ import MainLayout from "@layouts/MainLayout.astro";
 import PokemonCard from "@components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from "@interfaces/pokemon-list.response";
 import Title from "@components/shared/Title.astro";
+import { Icon } from "astro-icon/components";
 
 export const getStaticPaths = (async () => {
   const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
@@ -23,9 +24,15 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
 
 <MainLayout title="Algún pokemon">
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
-    <div class="mb-8">
-      <button onclick="history.back()" class="text-blue-500">Regresar</button>
-      <Title>{name}</Title>
+    <div class="flex flex-row justify-between items-center gap-4">
+      <div>
+        <button onclick="history.back()" class="text-blue-500">Regresar</button>
+        <Title>{name}</Title>
+      </div>
+      <button id="btn-favorite">
+        <Icon name="heart-empty" size={40} class="text-red-500" />
+        <Icon name="heart-filled" size={40} class="text-red-500 hidden" />
+      </button>
     </div>
     <PokemonCard name={name} url={url} isBig />
     <audio controls class="mt-5">
@@ -38,5 +45,10 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
 <style>
   a {
     @apply hover:underline text-blue-500;
+  }
+
+  #btn-favorite {
+    @apply cursor-pointer;
+    @apply hover:animate-pulse;
   }
 </style>
