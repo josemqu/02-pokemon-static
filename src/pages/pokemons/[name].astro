@@ -7,7 +7,7 @@ import Title from "@components/shared/Title.astro";
 import { Icon } from "astro-icon/components";
 
 export const getStaticPaths = (async () => {
-  const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=160");
   const { results } = (await resp.json()) as PokemonListResponse;
 
   return results.map(({ name, url }) => ({
