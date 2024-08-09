@@ -20,7 +20,7 @@ const { page } = Astro.props;
   <Title>Listado paginado</Title>
   <section
     aria-label="Listado de pókemons"
-    class="grid grid-cols-1 gap-4 mt-8 sm:grid-cols-4 md:grid-cols-5"
+    class="grid grid-cols-2 gap-4 mt-8 sm:grid-cols-4 md:grid-cols-5"
   >
     {page.data.map(({ name, url }) => <PokemonCard name={name} url={url} />)}
   </section>
