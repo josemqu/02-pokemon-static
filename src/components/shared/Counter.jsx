@@ -5,8 +5,8 @@ export const Counter = () => {
 
   return (
     <>
-      <h1 class="text-4xl">Counter</h1>
-      <h3 class="text-xl">{counter()}</h3>
+      <h1 class="text-2xl">Counter</h1>
+      <h3 class="text-2xl font-bold">{counter()}</h3>
       <div>
         <button
           onClick={() => setCounter((prev) => --prev)}
