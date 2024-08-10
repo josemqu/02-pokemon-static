@@ -48,14 +48,10 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
 </MainLayout>
 
 <script>
+  import type { FavoritePokemon } from "@interfaces/favorite-pokemon";
   const handlePageLoad = () => {
-    interface FavouritePokemon {
-      name: string;
-      id: number;
-    }
-
-    let favouritePokemons: FavouritePokemon[] = JSON.parse(
-      localStorage.getItem("favourites") ?? "[]"
+    let favoritePokemons: FavoritePokemon[] = JSON.parse(
+      localStorage.getItem("favorites") ?? "[]"
     );
 
     const btnFavorite = document.querySelector(
@@ -72,39 +68,39 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
       "[data-filled]"
     ) as HTMLElement;
 
-    const isFavourite = favouritePokemons.some(
+    const isFavorite = favoritePokemons.some(
       (pokemon) => pokemon.id === Number(id)
     );
 
-    if (isFavourite) {
+    if (isFavorite) {
       heartEmpty.classList.add("hidden");
       heartFilled.classList.remove("hidden");
     }
 
-    const toggleFavourite = () => {
-      const isFavourite = favouritePokemons.some(
+    const toggleFavorite = () => {
+      const isFavorite = favoritePokemons.some(
         (pokemon) => pokemon.id === Number(id)
       );
 
-      if (isFavourite) {
-        favouritePokemons = favouritePokemons.filter(
+      if (isFavorite) {
+        favoritePokemons = favoritePokemons.filter(
           (pokemon) => pokemon.id !== Number(id)
         );
       } else {
-        favouritePokemons.push({
+        favoritePokemons.push({
           name: name,
           id: Number(id),
         });
       }
 
-      localStorage.setItem("favourites", JSON.stringify(favouritePokemons));
+      localStorage.setItem("favorites", JSON.stringify(favoritePokemons));
     };
 
     btnFavorite.addEventListener("click", () => {
       heartEmpty.classList.toggle("hidden");
       heartFilled.classList.toggle("hidden");
 
-      toggleFavourite();
+      toggleFavorite();
     });
   };
 
